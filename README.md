@@ -4,6 +4,7 @@ add connection string to appsettings.json
 run ef database update 
 
 dotnet tool install --global dotnet-ef # install ef tools
+
 dotnet ef database update -v # run the db migrations against db (will create tables/views)
 
 dotnet ef migrations add MIGRATIONAME # will create a new migration file for db updates
