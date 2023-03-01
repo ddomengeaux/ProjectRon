@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ProjectRon.Data;
 
-public class ApplicationDbContext : IdentityDbContext<IdentityUser<Guid>, IdentityRole<Guid>, Guid>
+public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, Guid>
 
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
