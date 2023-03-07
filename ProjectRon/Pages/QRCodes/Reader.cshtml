@@ -1,0 +1,13 @@
+@page
+@model ProjectRon.Pages.QRCodes.ReaderModel
+
+@{
+    ViewData["Title"] = "Reader";
+}
+
+<h1>Reader</h1>
+
+<form enctype="multipart/form-data" method="post">
+    <input id="qrcode" class="btn" type="file" value="Upload" accept=“image/*” capture />
+    <input type="submit" value="Read" class="btn btn-primary" />
+</form>
