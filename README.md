@@ -35,3 +35,11 @@ dotnet aspnet-codegenerator identity -dc ProjectRon.Data.ApplicationDbContext
 
 Edit out the html in Areas/Identity/Account/Login.cshtml and Register.cshtml and the external login options will go away.
 
+----
+
+Scaffold out existing db tables
+
+dotnet ef dbcontext scaffold "CONNSTRING" Microsoft.EntityFrameworkCore.SqlServer --table NewTable --context-dir Data --output-dir Data
+
+this will generate a new model in the Data folder and a new testContext. You can copy the dbset and onmodelbuilding into applicationdbcontext
+
