@@ -33,5 +33,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pages\QRCodes\" />
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\images\" />
   </ItemGroup>
 </Project>
