@@ -4,8 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProjectRon.Data;
 
-[Table("QRCode")]
-public class QRCode
+[Table("Prize")]
+public class Prize
 {
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int ID { get; set; }
@@ -13,7 +13,5 @@ public class QRCode
     public string? Description { get; set; }
     [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
     public DateTime Updated { get; set; }
-
-    public string? Code { get; set; }
 }
 

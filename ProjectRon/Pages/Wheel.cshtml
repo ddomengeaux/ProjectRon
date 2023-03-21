@@ -9,16 +9,13 @@
 }
 
 <div align="center">
-    <h1>Winwheel.js example wheel - basic code wheel</h1>
-    <p>Here is an example of a basic code drawn wheel which spins to a stop with the prize won alerted to the user.</p>
-    <br />
-    <p>Choose a power setting then press the Spin button. You will be alerted to the prize won when the spinning stops.</p>
-    <br />
+
+
     <table cellpadding="0" cellspacing="0" border="0">
         <tr>
             <td>
                 <div class="power_controls">
-                    <br />
+                    @*<br />
                     <br />
                     <table class="power" cellpadding="10" cellspacing="0">
                         <tr>
@@ -33,7 +30,7 @@
                         <tr>
                             <td align="center" id="pw1" onClick="powerSelected(1);">Low</td>
                         </tr>
-                    </table>
+                    </table>*@
                     <br />
                     <img id="spin_button" src="~/images/spin_off.png" alt="Spin" onClick="startSpin();" />
                     <br /><br />
@@ -51,25 +48,26 @@
 
 <script>// Create new wheel object specifying the parameters at creation time.
     let theWheel = new Winwheel({
-        'numSegments': 8,     // Specify number of segments.
+        'numSegments': @Html.Raw(Model.PrizeCount),     // Specify number of segments.
         'outerRadius': 212,   // Set outer radius so wheel fits inside the background.
         'textFontSize': 28,    // Set font size as desired.
         'segments':        // Define segments including colour and text.
             [
-                { 'fillStyle': '#eae56f', 'text': 'Prize 1' },
-                { 'fillStyle': '#89f26e', 'text': 'Prize 2' },
-                { 'fillStyle': '#7de6ef', 'text': 'Prize 3' },
-                { 'fillStyle': '#e7706f', 'text': 'Prize 4' },
-                { 'fillStyle': '#eae56f', 'text': 'Prize 5' },
-                { 'fillStyle': '#89f26e', 'text': 'Prize 6' },
-                { 'fillStyle': '#7de6ef', 'text': 'Prize 7' },
-                { 'fillStyle': '#e7706f', 'text': 'Prize 8' }
+                @Html.Raw(Model.Prizes)
+                //{ 'fillStyle': '#eae56f', 'text': 'Prize 1' },
+                //{ 'fillStyle': '#89f26e', 'text': 'Prize 2' },
+                //{ 'fillStyle': '#7de6ef', 'text': 'Prize 3' },
+                //{ 'fillStyle': '#e7706f', 'text': 'Prize 4' },
+                //{ 'fillStyle': '#eae56f', 'text': 'Prize 5' },
+                //{ 'fillStyle': '#89f26e', 'text': 'Prize 6' },
+                //{ 'fillStyle': '#7de6ef', 'text': 'Prize 7' },
+                //{ 'fillStyle': '#e7706f', 'text': 'Prize 8' }
             ],
         'animation':           // Specify the animation to use.
         {
             'type': 'spinToStop',
             'duration': 5,     // Duration in seconds.
-            'spins': 8,     // Number of complete spins.
+            'spins': 9,     // Number of complete spins.
             'callbackFinished': alertPrize
         }
     });
@@ -131,6 +129,13 @@
             document.getElementById('spin_button').src = "images/spin_off.png";
             document.getElementById('spin_button').className = "";
 
+            // This formula always makes the wheel stop somewhere inside prize 3 at least
+            // 1 degree away from the start and end edges of the segment.
+            let stopAt = theWheel.getRandomForSegment(@Model.Prize);
+
+            // Important thing is to set the stopAngle of the animation before stating the spin.
+            theWheel.animation.stopAngle = stopAt;
+
             // Begin the spin animation by calling startAnimation on the wheel object.
             theWheel.startAnimation();
 
@@ -162,4 +167,6 @@
     function alertPrize(indicatedSegment) {
         // Do basic alert of the segment text. You would probably want to do something more interesting with this information.
         alert("You have won " + indicatedSegment.text);
-    }</script>
+    }
+
+</script>

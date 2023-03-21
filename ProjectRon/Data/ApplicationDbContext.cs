@@ -16,6 +16,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, Applicati
 
     public DbSet<QRCode> QRCodes { get; set; } = default!;
     public virtual DbSet<NewTable> NewTables { get; set; }
+    public virtual DbSet<Prize> Prizes { get; set; }
+    public virtual DbSet<SelectedPrize> SelectedPrizes { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -23,7 +25,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, Applicati
 
         builder.Entity<QRCode>()
             .Property(s => s.Updated)
-            .HasDefaultValue(DateTime.Now);
+            .HasDefaultValueSql("getutcdate()");
 
         builder.Entity<NewTable>(entity =>
         {
@@ -39,6 +41,13 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser, Applicati
                 .HasColumnName("column_2");
             entity.Property(e => e.Column3).HasColumnName("column_3");
         });
+
+        builder.Entity<Prize>()
+            .Property(s => s.Updated)
+            .HasDefaultValueSql("getutcdate()");
+        builder.Entity<SelectedPrize>()
+            .Property(s => s.Updated)
+            .HasDefaultValueSql("getutcdate()");
     }
 }
 
